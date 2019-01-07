@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	
+    <groupId>com.cs.tmt</groupId>
+	<artifactId>tmt-webservices-client-axis2</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	
+	<modelVersion>4.0.0</modelVersion>
+	<inceptionYear>2019</inceptionYear>
+	<packaging>jar</packaging>
+		
+	 <properties>
+		<axis2.version>1.6.2</axis2.version>
+        <log4j.version>1.2.16</log4j.version>
+    </properties>
+	
+	<parent>
+        <groupId>com.cs.tmt</groupId>
+        <artifactId>trade-management</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+	
+ <build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+		
+		<plugins>
+			<plugin>
+            <groupId>org.apache.axis2</groupId>
+            <artifactId>axis2-wsdl2code-maven-plugin</artifactId>
+            <version>1.6.2</version>
+            <executions>
+                <execution>
+                    <goals>
+                        <goal>wsdl2code</goal>
+                    </goals>
+                    <configuration>
+                        <wsdlFile>${basedir}/src/main/resources/InfoDataService.wsdl</wsdlFile>
+                        <databindingName>adb</databindingName>
+                        <packageName>com.cs.tmt</packageName>
+                        <outputDirectory>src/main/java</outputDirectory>
+                        <flattenFiles>true</flattenFiles>
+                    </configuration>
+                </execution>
+            </executions>
+        	</plugin>
+        	<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+	
+	<dependencies>
+		<dependency>
+	        <groupId>org.apache.axis2</groupId>
+	        <artifactId>axis2-kernel</artifactId>
+	        <version>${axis2.version}</version>
+	    </dependency>
+	    <dependency>
+	        <groupId>org.apache.axis2</groupId>
+	        <artifactId>axis2-adb</artifactId>
+	        <version>${axis2.version}</version>
+	    </dependency>
+	    <dependency>
+	        <groupId>org.apache.axis2</groupId>
+	        <artifactId>axis2-transport-http</artifactId>
+	        <version>${axis2.version}</version>
+	    </dependency>
+	    <dependency>
+	        <groupId>org.apache.axis2</groupId>
+	        <artifactId>axis2-transport-local</artifactId>
+	        <version>${axis2.version}</version>
+	    </dependency>
+	    <dependency>
+	        <groupId>org.apache.axis2</groupId>
+	        <artifactId>axis2-xmlbeans</artifactId>
+	        <version>${axis2.version}</version>
+	    </dependency>
+		<dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+	</dependencies>
+	
+</project>

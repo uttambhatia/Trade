@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.cs.tmt</groupId>
+  <artifactId>tmt-webservices-client-cxf</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  
+  <properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+  </properties>
+	
+	<parent>
+        <groupId>com.cs.tmt</groupId>
+        <artifactId>trade-management</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+	
+  <dependencies>
+  
+    <dependency>
+      <groupId>org.apache.cxf</groupId>
+      <artifactId>cxf-rt-frontend-jaxws</artifactId>
+      <version>3.2.7</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>org.apache.cxf</groupId>
+      <artifactId>cxf-rt-transports-http</artifactId>
+      <version>3.2.7</version>
+    </dependency>
+    
+  </dependencies>
+  
+  <build>
+		<plugins>
+		
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+				  <source>1.8</source>
+				  <target>1.8</target>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+			    <groupId>org.apache.cxf</groupId>
+			    <artifactId>cxf-codegen-plugin</artifactId>
+			    <version>3.2.7</version>
+			    <executions>
+			        <execution>
+			            <id>generate-sources</id>
+			            <phase>generate-sources</phase>
+			            <configuration>
+						   <sourceRoot>${basedir}/src/main/java</sourceRoot>
+						   <wsdlOptions>
+						    <wsdlOption>
+						      <wsdl>${basedir}/src/main/resources/InfoDataService.wsdl</wsdl>
+						    </wsdlOption>
+						   </wsdlOptions>
+						</configuration>
+			            <goals>
+			                <goal>wsdl2java</goal>
+			            </goals>
+			        </execution>
+			    </executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>properties-maven-plugin</artifactId>
+				<version>1.0-alpha-2</version>
+				<executions>
+				  <execution>
+					<goals>
+					  <goal>set-system-properties</goal>
+					</goals>
+					<configuration>
+					  <properties>
+						<property>
+						  <name>javax.net.ssl.keyStore</name>
+						  <value>${basedir}/src/main/resources/cert.jks</value>
+						</property>
+						<property>
+							<name>javax.net.ssl.keyStoreType</name>
+							<value>jks</value>
+						</property>
+						<property>
+						  <name>javax.net.ssl.keyStorePassword</name>
+						  <value>secret</value>
+						</property>
+						<property>
+							<name>maven.wagon.http.ssl.insecure</name>
+							<value>true</value>
+						</property>
+						<property>
+							<name>maven.wagon.http.ssl.allowall</name>
+							<value>true</value>
+						</property>
+					  </properties>
+					</configuration>
+				  </execution>
+				</executions>
+			</plugin>
+			
+		</plugins>
+	</build>
+	
+</project>

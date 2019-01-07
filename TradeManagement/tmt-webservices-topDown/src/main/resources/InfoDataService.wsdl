@@ -1,0 +1,101 @@
+<definitions name="InfoDataService" xmlns="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://ws.tmt.cs.com"
+	targetNamespace="http://ws.tmt.cs.com">
+
+	<types>
+		<xs:schema targetNamespace="http://ws.tmt.cs.com" elementFormDefault="qualified">
+
+			<xs:complexType name="infoData">
+				<xs:sequence>
+					<xs:element name = "version" type = "xs:string" />
+					<xs:element name = "configType" type = "xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+
+			<xs:complexType name = "getInfoDataRequest">
+			</xs:complexType>
+			
+			<xs:complexType name = "getInfoDataResponse">
+			  <xs:sequence>
+			    <xs:element name = "version" type = "xs:string" />
+			  </xs:sequence>
+			</xs:complexType>
+			
+			<xs:complexType name = "getInfoDataDetailsRequest">
+			  <xs:sequence>
+			    <xs:element name =  "infoData" type = "tns:infoData"/>
+			  </xs:sequence>
+			</xs:complexType>
+			
+			<xs:complexType name="getInfoDataDetailsResponse">
+			  <xs:sequence>
+			    <xs:element name =  "infoData" type =  "tns:infoData" />
+			  </xs:sequence>
+			</xs:complexType>
+			
+			<xs:element name="getInfoDataRequest" type = "tns:getInfoDataRequest" />
+			<xs:element name="getInfoDataResponse" type = "tns:getInfoDataResponse"/>
+			<xs:element name="getInfoDataDetailsRequest" type =  "tns:getInfoDataDetailsRequest" />
+			<xs:element name="getInfoDataDetailsResponse" type = "tns:getInfoDataDetailsResponse" />
+			
+		</xs:schema>
+	</types>
+
+	<message name="getInfoDataRequest">
+		<part name="parameters" element="tns:getInfoDataRequest" />
+	</message>
+	<message name="getInfoDataResponse">
+		<part name="response" element="tns:getInfoDataResponse" />
+	</message>
+	<message name="getInfoDataDetailsRequest">
+		<part name="parameters" element="tns:getInfoDataDetailsRequest" />
+	</message>
+	<message name="getInfoDataDetailsResponse">
+		<part name="response" element="tns:getInfoDataDetailsResponse" />
+	</message>
+
+	<portType name="InfoDataPortType">
+		<operation name="getInfoData">
+			<input message="tns:getInfoDataRequest" name = "getInfoDataRequest"/>
+			<output message="tns:getInfoDataResponse" name =  "getInfoDataResponse"/>
+		</operation>
+		<operation name="getInfoDetails">
+		  <input message="tns:getInfoDataDetailsRequest" name =  "getInfoDataDetailsRequest" />
+		  <output message="tns:getInfoDataDetailsResponse" name = "getInfoDataDetailsResponse"/>
+		</operation>
+	</portType>
+
+	<binding name="InfoDataServiceSoapBinding" type="tns:InfoDataPortType">
+	
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+		
+		<operation name="getInfoData">
+			<soap:operation soapAction="" />
+			<input name = "getInfoDataRequest">
+				<soap:body use="literal" />
+			</input>
+			<output name = "getInfoDataResponse">
+				<soap:body use="literal" />
+			</output>
+		</operation>
+		
+		<operation name="getInfoDetails">
+			<soap:operation soapAction="" />
+			<input name = "getInfoDataDetailsRequest">
+				<soap:body use="literal" />
+			</input>
+			<output name = "getInfoDataDetailsResponse">
+				<soap:body use="literal" />
+			</output>
+		</operation>
+		
+	</binding>
+
+	<service name="InfoDataService">
+		<port name="InfoDataPort" binding="tns:InfoDataServiceSoapBinding">
+			<soap:address location="http://localhost:8090/services/InfoDataService" />
+		</port>
+	</service>
+
+</definitions>
