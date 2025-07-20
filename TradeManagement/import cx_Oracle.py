@@ -7,8 +7,8 @@ from email.mime.application import MIMEApplication
 
 # Step 1: Connect to Oracle Database using python-oracledb in thin mode
 conn = oracledb.connect(
-    user='system',
-    password='admin',
+    user='',
+    password='',
     dsn='localhost:1521/xe'  # Example: 'localhost:1521/XEPDB1'
 )
 
@@ -43,13 +43,13 @@ def send_email(sender, receiver, subject, body, smtp_server, port, login, passwo
 
 # Example email parameters
 send_email(
-    sender='uttamshur@gmail.com',
-    receiver='uttamshur@gmail.com',
+    sender='@gmail.com',
+    receiver='@gmail.com',
     subject='Employee Records',
     body='Please find attached the latest employee data.',
     smtp_server='smtp.gmail.com',
     port=587,
-    login='uttamshur@gmail.com',
-    password='accuqbxfaxpsckpq',
+    login='@gmail.com',
+    password='',
     attachment_path=csv_file
 )
